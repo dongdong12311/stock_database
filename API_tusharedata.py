@@ -5,17 +5,11 @@ Created on Wed Jan 24 21:19:39 2018
 @author: Administrator
 """
 import pymysql    
-import pandas as pd
-import os,sys
-from sqlalchemy import create_engine  
-import numpy as np
-from datetime import datetime
-import datetime
-from dateutil.parser import parse
-class tushareDataDB:
+from SqlHandle import SqlHandle
+class tushareDataDB(SqlHandle):
     def __init__(self):
-        self.__db=pymysql.connect("localhost","root","123123","tushare_stockdata",charset='utf8')
-        self.__cursor=self.__db.cursor()      
+        self.db=pymysql.connect("localhost","root","123123","tushare_stockdata",charset='utf8')
+        self.cursor=self.db.cursor()      
     def readDatas(self,code,*args):
         if len(args)==0:
             sql="SELECT * FROM tushare_stockdata."+code+";"
@@ -26,26 +20,11 @@ class tushareDataDB:
         else:
             print('wrong input in getdays()!')
             return None
-        return self.__fetchall(sql)
+        return self.fetchall(sql)
     def readData(self,code,date):
         sql="SELECT * FROM tushare_stockdata."+code+" where date = '"+date+"';"
-        return self.__fetchall(sql)
-    def __fetchall(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchall())  
-    def fetchall(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchall()) 
-    def fetchone(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchone()) 
-    def __fetchone(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchone())  
+        return self.fetchall(sql)
+ 
         
 if __name__=='__main__':
     a=tushareDataDB()

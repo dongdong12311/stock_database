@@ -1,8 +1,9 @@
 import pymysql
-class TDays:
+from SqlHandle import SqlHandle
+class TDays(SqlHandle):
     def __init__(self):
-        self.__db=pymysql.connect("localhost","root","123123","tdays",charset='utf8')
-        self.__cursor=self.__db.cursor()
+        self.db=pymysql.connect("localhost","root","123123","tdays",charset='utf8')
+        self.cursor=self.db.cursor()
     def GetTradeDays(self,*args):
         if len(args)==0:
             sql="SELECT * FROM tdays.tdays;"
@@ -13,16 +14,20 @@ class TDays:
         else:
             print('wrong input in getdays()!')
             return None
-        return self.__fetchall(sql)
-        return self.__fetchone(sql)
-    def __fetchall(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchall())  
-    def __fetchone(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchone())  
+        return self.fetchall(sql)
+
+    def GetTradeDays_Include_end(self,*args):
+        if len(args)==0:
+            sql="SELECT * FROM tdays.tdays;"
+        elif len(args)==1:
+            sql="SELECT * FROM tdays.tdays where date >= '"+args[0]+"';"
+        elif len(args)==2:
+            sql="SELECT * FROM tdays.tdays where date >= '"+args[0]+"' and date<='"+args[1]+"';"
+        else:
+            print('wrong input in getdays()!')
+            return None
+        return self.fetchall(sql)
+
 if __name__=='__main__':
     a=TDays()
     re=a.GetTradeDays()

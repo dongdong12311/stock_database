@@ -45,6 +45,7 @@ for code in codes:
         lastdate=datetime.datetime(re[0].year,re[0].month,re[0].day)
         begindate=lastdate+datetime.timedelta(1)
         if today<begindate:
+            print("数据不需要更新")
             continue
         data=ts.get_hist_data(code,datetime.datetime.strftime(begindate,"%Y-%m-%d"),datetime.datetime.strftime(today,"%Y-%m-%d"))
     else:

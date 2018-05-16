@@ -12,10 +12,11 @@ import numpy as np
 from datetime import datetime
 import datetime
 from dateutil.parser import parse
-class StockIndex:
+from SqlHandle import SqlHandle
+class StockIndex(SqlHandle):
     def __init__(self):
-        self.__db=pymysql.connect("localhost","root","123123","stock_index",charset='utf8')
-        self.__cursor=self.__db.cursor()
+        self.db=pymysql.connect("localhost","root","123123","stock_index",charset='utf8')
+        self.cursor=self.db.cursor()
         self.__index_name={"上证50":"000016.SH",
                     "50etf":"510050.SH",
                     "上证综指":"000001.SH",
@@ -36,15 +37,10 @@ class StockIndex:
         else:
             print('wrong input in getdays()!')
             return None
-        return self.__fetchall(sql)
+        return self.fetchall(sql)
     def readData(self,code,date):
         sql="SELECT * FROM stock.`"+code+"` where date = '"+date+"';"
-        return self.__fetchall(sql)
-    def __fetchall(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchall())  
-    def __fetchone(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchone())  
+        return self.fetchall(sql)
+if __name__=='__main__':
+    a = StockIndex()
+    re  = a.InquiryName('上证50')

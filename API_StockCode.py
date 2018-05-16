@@ -1,22 +1,18 @@
+#获取股票的名称和代码
+
 import pymysql
-class CodeManagement:
+from  SqlHandle import SqlHandle
+class CodeManagement(SqlHandle):
     def __init__(self):
-        self.__db=pymysql.connect("localhost","root","123123","stock",charset='utf8')
-        self.__cursor=self.__db.cursor()
+        self.db=pymysql.connect("localhost","root","123123","stock",charset='utf8')
+        self.cursor=self.db.cursor()
     def GetCodeName(self):
         sql="SELECT * FROM stock.stockname;"
-        return self.__fetchall(sql)
+        return self.fetchall(sql)
     def GetWindCode(self):
         sql="SELECT * FROM stock.stocknamechar;"
-        return self.__fetchall(sql)
-    def __fetchall(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchall())  
-    def __fetchone(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchone())  
+        return self.fetchall(sql)
+
 if __name__=='__main__':
     a=CodeManagement()
     re=a.GetCodeName()

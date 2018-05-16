@@ -12,25 +12,19 @@ import numpy as np
 from datetime import datetime
 import datetime
 from dateutil.parser import parse
-class WindData_sliceDB:
+from SqlHandle import SqlHandle
+class WindData_sliceDB(SqlHandle):
     def __init__(self):
-        self.__db=pymysql.connect("localhost","root","123123","stockslice",charset='utf8')
-        self.__cursor=self.__db.cursor()      
+        self.db=pymysql.connect("localhost","root","123123","stockslice",charset='utf8')
+        self.cursor=self.db.cursor()      
     def readData(self,date):
         sql="SELECT * FROM stockslice.`"+date+"`;"
-        return self.__fetchall(sql)
+        return self.fetchall(sql)
     def GetcolumnNames(self):
         return ['DATE', 'OPEN', 'HIGH', 'LOW', 'CLOSE', 'CHG', 'PCT_CHG',
                'ADJFACTOR', 'TURN', 'VOL_RATIO', 'INDUSTRY_CSRC12', 'FREE_TURN',
                'PE_TTM', 'PB_LF', 'CODE']
-    def __fetchall(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchall())  
-    def __fetchone(self,sql):
-        self.__cursor.execute(sql)
-        self.__db.commit()
-        return (self.__cursor.fetchone())  
+
         
 if __name__=='__main__':
     a=WindData_sliceDB()
