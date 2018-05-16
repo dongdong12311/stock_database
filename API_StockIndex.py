@@ -4,6 +4,7 @@ Created on Wed Jan 24 21:19:39 2018
 
 @author: Administrator
 """
+'''
 import pymysql    
 import pandas as pd
 import os,sys
@@ -37,4 +38,5 @@ class WindDataDB:
     def __fetchone(self,sql):
         self.__cursor.execute(sql)
         self.__db.commit()
-        return (self.__cursor.fetchone())  
+        return (self.__cursor.fetchone()) 
+        '''
