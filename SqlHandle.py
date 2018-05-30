@@ -8,10 +8,6 @@ Created on Wed May 16 20:46:31 2018
 
 from abc import ABCMeta, abstractmethod
 class  SqlHandle:
-
-    __metaclass__ = ABCMeta
-
-    @abstractmethod
     def fetchall(self,sql):
         self.cursor.execute(sql)
         self.db.commit()

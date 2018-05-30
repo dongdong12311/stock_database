@@ -1,5 +1,5 @@
 import pymysql
-from SqlHandle import SqlHandle
+from stock_database.SqlHandle import SqlHandle
 class TDays(SqlHandle):
     def __init__(self):
         self.db=pymysql.connect("localhost","root","123123","tdays",charset='utf8')

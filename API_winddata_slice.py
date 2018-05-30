@@ -12,7 +12,7 @@ import numpy as np
 from datetime import datetime
 import datetime
 from dateutil.parser import parse
-from SqlHandle import SqlHandle
+from stock_database.SqlHandle import SqlHandle
 class WindData_sliceDB(SqlHandle):
     def __init__(self):
         self.db=pymysql.connect("localhost","root","123123","stockslice",charset='utf8')
