@@ -7,22 +7,22 @@ codes=CodeManagement().GetCodeName()
 from API_tusharedata import tushareDataDB
 database=tushareDataDB()
 import pymysql
-yconnect=create_engine('mysql+mysqldb://root:123123@localhost:3306/tushare_stockdata?charset=utf8')  
-db=pymysql.connect("localhost","root","123123","tushare_stockdata",charset='utf8')
+yconnect=create_engine('mysql+mysqldb://root:123123@localhost:3306/tushare_stock_data?charset=utf8')  
+db=pymysql.connect("localhost","root","123123","tushare_stock_data",charset='utf8')
 cursor=db.cursor()   
 today=datetime.datetime.today()
 if today.hour<=18:
     today=today-datetime.timedelta(1)
 for code in codes:
     code=code[0]
-    sql="""SELECT * FROM tushare_stockdata.`"""+code+"""`
+    sql="""SELECT * FROM tushare_stock_data.`"""+code+"""`
     order by date  desc limit 1"""
     re=()
     try:
         re=database.fetchone(sql)
     except:
         print(code+"is not exist")
-        sql = """CREATE TABLE   `tushare_stockdata`.`"""+code+"""` (
+        sql = """CREATE TABLE   `tushare_stock_data`.`"""+code+"""` (
           `date` DATE NOT NULL,
           `open` DOUBLE NULL,
           `high` DOUBLE NULL,
@@ -53,4 +53,4 @@ for code in codes:
     if data is not None and len(data)>0:
         print("写入"+code)
         pd.io.sql.to_sql(data,code, yconnect, 
-                         schema='tushare_stockdata',if_exists='append')
+                         schema='tushare_stock_data',if_exists='append')

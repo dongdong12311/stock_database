@@ -17,9 +17,9 @@ def fetchall(sql):
 def write(datestr,dataslice):
     print("写入"+datestr)
     pd.io.sql.to_sql(dataslice,datestr, yconnect, 
-                     schema='tusharedataslice',index=False,if_exists='append')    
-yconnect=create_engine('mysql+mysqldb://root:123123@localhost:3306/tusharedataslice?charset=utf8')  
-db=pymysql.connect("localhost","root","123123","tusharedataslice",charset='utf8')
+                     schema='tushare_stock_data_slice',index=False,if_exists='append')    
+yconnect=create_engine('mysql+mysqldb://root:123123@localhost:3306/tushare_stock_data_slice?charset=utf8')  
+db=pymysql.connect("localhost","root","123123","tushare_stock_data_slice",charset='utf8')
 cursor=db.cursor()   
 ipodates=IpodateManagement()
 sql="""show tables"""

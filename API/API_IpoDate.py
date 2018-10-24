@@ -1,5 +1,5 @@
 import pymysql
-from SqlHandle import SqlHandle
+from  .SqlHandle import SqlHandle
 class IpodateManagement(SqlHandle):
     def __init__(self):
         self.db=pymysql.connect("localhost","root","123123","ipodate",charset='utf8')
@@ -8,7 +8,6 @@ class IpodateManagement(SqlHandle):
         sql="""SELECT * FROM ipodate.ipodate
         where stock='"""+code+"""';"""
         return self.fetchone(sql)
-
-if __name__=='__main__':
+'''if __name__=='__main__':
     a=IpodateManagement()
-    re=a.GetIpodate('600232')
+    re=a.GetIpodate('600232')'''

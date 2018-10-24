@@ -1,5 +1,5 @@
 #用于更新交易日信息
-from API_TradeDays import TDays
+from API.API_TradeDays import TDays
 from dateutil.parser import parse
 import datetime 
 import tushare as ts

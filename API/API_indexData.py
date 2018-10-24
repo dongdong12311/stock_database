@@ -4,15 +4,10 @@ Created on Wed Jan 24 21:19:39 2018
 
 @author: Administrator
 """
-import pymysql    
-import pandas as pd
-import os,sys
-from sqlalchemy import create_engine  
-import numpy as np
+import pymysql     
 from datetime import datetime
 import datetime
-from dateutil.parser import parse
-from SqlHandle import SqlHandle
+from  .SqlHandle import SqlHandle
 class StockIndex(SqlHandle):
     def __init__(self):
         self.db=pymysql.connect("localhost","root","123123","stock_index",charset='utf8')

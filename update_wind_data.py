@@ -17,7 +17,7 @@ from API_StockCode import CodeManagement
 w.start()
 codes=CodeManagement().GetCodeName()
 yconnect=create_engine('mysql+mysqldb://root:123123@localhost:3306/stock?charset=utf8')  
-db=pymysql.connect("localhost","root","123123","stock",charset='utf8')
+db=pymysql.connect("localhost","root","123123","wind_stock_data",charset='utf8')
 cursor=db.cursor()
 for code in codes:
     code=code[0]
@@ -27,13 +27,13 @@ for code in codes:
         windcode=code+'.SZ'        
     
     
-    sql="""SELECT * FROM stock.`"""+code+"""` 
+    sql="""SELECT * FROM wind_stock_data.`"""+code+"""` 
     order by DATE desc limit 1;"""
     try:
         cursor.execute(sql)
         db.commit()
     except:
-        sql = """CREATE TABLE  `stock`.`"""+code+"""` (
+        sql = """CREATE TABLE  `wind_stock_data`.`"""+code+"""` (
           `DATE` DATETIME NOT NULL,
           `OPEN` DOUBLE NULL,
           `HIGH` DOUBLE NULL,
@@ -83,7 +83,7 @@ for code in codes:
     temp['DATE']=temp.index      
     try:
         pd.io.sql.to_sql(temp,code, yconnect, 
-                     schema='stock',index=False,if_exists='append')
+                     schema='wind_stock_data',index=False,if_exists='append')
     except:
         print(code)
         print("无法写入")

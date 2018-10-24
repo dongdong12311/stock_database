@@ -1,6 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jan 24 21:19:39 2018
+
+@author: Administrator
+"""
 import pymysql
-from stock_database.SqlHandle import SqlHandle
+from .SqlHandle import SqlHandle
 class TDays(SqlHandle):
+    pass
     def __init__(self):
         self.db=pymysql.connect("localhost","root","123123","tdays",charset='utf8')
         self.cursor=self.db.cursor()
@@ -27,9 +34,9 @@ class TDays(SqlHandle):
             print('wrong input in getdays()!')
             return None
         return self.fetchall(sql)
-
+'''
 if __name__=='__main__':
     a=TDays()
     re=a.GetTradeDays()
     re=a.GetTradeDays('2018-01-01')
-    re=a.GetTradeDays('2018-01-01','2018-01-30')
+    re=a.GetTradeDays('2018-01-01','2018-01-30')'''

@@ -1,6 +1,6 @@
 import tushare as ts
 import pymysql
-from  API_IpoDate import IpodateManagement
+from  API.API_IpoDate import IpodateManagement
 from dateutil.parser import parse
 import datetime
 ipodates=IpodateManagement()

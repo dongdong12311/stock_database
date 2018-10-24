@@ -1,7 +1,7 @@
 import tushare as ts
 import pymysql
-from  API_StockCode import CodeManagement
-codes=CodeManagement().GetCodeName()
+from API import API_StockCode
+codes=API_StockCode.CodeManagement().GetCodeName()
 a=ts.get_stock_basics()
 import sys
 if len(codes)<len(a):
@@ -10,7 +10,7 @@ if len(codes)<len(a):
     for code in codes:
         temp.append(code[0])  
     allcodes=list(a.index)
-    db=pymysql.connect("localhost","root","123123","stock",charset='utf8')
+    db=pymysql.connect("localhost","root","123123","wind_stock_data",charset='utf8')
     cursor=db.cursor()
     for code in allcodes:
         if code not in temp:
